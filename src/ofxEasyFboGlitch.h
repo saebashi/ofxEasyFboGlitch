@@ -13,6 +13,7 @@ public:
 
     //void setup();
     void draw(ofFbo _fbo,float _x,float _y,float _w,float _h);
+    void setGlichResetProbability (float _probability);
     
     ofImage glitchImg;
     ofImageQualityType imgQuality;
@@ -21,5 +22,6 @@ public:
     ofFbo fbo;
     ofPixels pix;
     ofxFastFboReader reader;
+    float glitchResetProbability;
 };
 #endif

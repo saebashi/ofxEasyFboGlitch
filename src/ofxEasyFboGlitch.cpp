@@ -6,6 +6,7 @@ ofxEasyFboGlitch::ofxEasyFboGlitch(){
     fboH=240;
     imgQuality =OF_IMAGE_QUALITY_WORST;
     fbo.allocate(fboW,fboH);
+    glitchResetProbability=0.3;
 }
 
 //--------------------------------------------------------------
@@ -31,8 +32,12 @@ void ofxEasyFboGlitch::draw(ofFbo _fbo,float _drawX,float _drawY,float _drawW,fl
         buffer[whichByte] |= bitMask;
         ofBufferToFile(breakImgName,file);
         glitchImg.loadImage(breakImgName);
-        if (ofRandom(100)>10) {
+        if (ofRandom(1)<glitchResetProbability) {
             glitchReset=true;
         }
     glitchImg.draw(_drawX, _drawY, _drawW,_drawH);
+}
+//--------------------------------------------------------------
+void ofxEasyFboGlitch::setGlichResetProbability (float _probability){
+    glitchResetProbability=ofClamp(_probability,0,1);;
 }
