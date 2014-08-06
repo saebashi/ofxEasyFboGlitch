@@ -12,6 +12,7 @@ public:
     ofxEasyFboGlitch();
 
     //void setup();
+    void allocate(float _w,float _h);
     void draw(ofFbo _fbo,float _x,float _y,float _w,float _h);
     void setGlichResetProbability (float _probability);
     

@@ -6,10 +6,11 @@ void ofApp::setup(){
     fbo.allocate(ofGetWidth(),ofGetHeight());
     img.loadImage("of.png");
     ofSetFrameRate(60);
-
+    
+    fboGlitch.allocate(320, 240);
     //prepare for prepare------
-    float r=ofGetWidth()*0.5;
-    for (int i=0; i<10; i++) {
+    float r=ofGetWidth()*0.3;
+    for (int i=0; i<25; i++) {
         ofVec3f newPos;
         newPos.set(ofRandomf()*r,ofRandomf()*r,ofRandomf()*r);
         pos.push_back(newPos);
@@ -25,18 +26,31 @@ void ofApp::update(){
 void ofApp::draw(){
     
     fbo.begin();
-    ofBackground(ofColor::fromHsb(ofGetFrameNum()%255,255, 100));
+    ofBackground(ofColor::fromHsb(ofGetFrameNum()%255,100, 200));
     ofSetColor(255);
     ofPushMatrix();
     ofSetCircleResolution(3);
-    ofTranslate(ofGetWidth()/2, ofGetWidth()/2);
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofRotateX(ofGetFrameNum());
     ofRotateZ((float)ofGetFrameNum()/3);
     ofRotateY(-(float)ofGetFrameNum()/2);
     ofEnableDepthTest();
+    ofEnableNormalizedTexCoords();
+    img.bind();
+    ofSetColor(255);
+    ofDrawBox(0, 0, 0, 200);
     for (int i=0; i<pos.size(); i++) {
-        img.draw(pos[i].x, pos[i].y,pos[i].z, 200+500*(float)i/pos.size(),200+500*(float)i/pos.size());
+        ofSetColor(ofColor::fromHsb(255*(float)i/pos.size(),150, 255));
+        ofPushMatrix();
+        ofRotateZ(ofGetFrameNum()*(float)i/pos.size());
+        ofRotateY((float)ofGetFrameNum()/3*(float)i/pos.size());
+        ofRotateX(-(float)ofGetFrameNum()/2*(float)i/pos.size());        ofTranslate(pos[i].x, pos[i].y,pos[i].z);
+        ofDrawBox(0, 0, 0, 50+100*(float)i/pos.size());
+        ofPopMatrix();
     }
+    img.unbind();
+    
+    ofDisableNormalizedTexCoords();
     fbo.end();
     ofPopMatrix();
     

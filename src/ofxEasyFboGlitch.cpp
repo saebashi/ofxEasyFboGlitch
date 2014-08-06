@@ -8,6 +8,13 @@ ofxEasyFboGlitch::ofxEasyFboGlitch(){
     fbo.allocate(fboW,fboH);
     glitchResetProbability=0.3;
 }
+//--------------------------------------------------------------
+void ofxEasyFboGlitch::allocate(float _w,float _h){
+    fboW=_w;
+    fboH=_h;
+    fbo.allocate(fboW,fboH);
+
+}
 
 //--------------------------------------------------------------
 void ofxEasyFboGlitch::draw(ofFbo _fbo,float _drawX,float _drawY,float _drawW,float _drawH){
