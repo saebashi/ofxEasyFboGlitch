@@ -35,11 +35,12 @@ void ofxEasyFboGlitch::draw(ofFbo _fbo,float _drawX,float _drawY,float _drawW,fl
     char bitMask=1 << whichBit;
     char* data=buffer.getData();
     data[whichByte] |= bitMask;
-    glitchImg.load(buffer);
-    if (ofRandom(1)<glitchResetProbability) {
+    if(glitchImg.load(buffer)){
+        glitchImg.draw(_drawX,_drawY,_drawW,_drawH);
+    }
+    if(ofRandom(1)<glitchResetProbability) {
         glitchReset=true;
     }
-    glitchImg.draw(_drawX,_drawY,_drawW,_drawH);
 }
 //--------------------------------------------------------------
 void ofxEasyFboGlitch::setGlichResetProbability (float _probability){
