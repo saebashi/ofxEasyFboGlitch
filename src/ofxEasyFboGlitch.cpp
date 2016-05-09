@@ -7,6 +7,7 @@ ofxEasyFboGlitch::ofxEasyFboGlitch(){
     imgQuality=OF_IMAGE_QUALITY_WORST;
     fbo.allocate(fboW,fboH);
     glitchResetProbability=0.3;
+    glitchReset=true;
 }
 //--------------------------------------------------------------
 void ofxEasyFboGlitch::allocate(float _w,float _h){
