@@ -6,7 +6,10 @@
 #include <iostream>
 
 #include "ofMain.h"
+
+#ifndef TARGET_OPENGLES
 #include "ofxFastFboReader.h"
+#endif
 class ofxEasyFboGlitch : public ofBaseApp{
 public:
     ofxEasyFboGlitch();
@@ -23,7 +26,9 @@ public:
     ofBuffer buffer;
     ofFbo fbo;
     ofPixels pix;
+#ifndef TARGET_OPENGLES
     ofxFastFboReader reader;
+#endif
     float glitchResetProbability;
 };
 #endif

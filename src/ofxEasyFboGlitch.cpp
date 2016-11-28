@@ -24,7 +24,11 @@ void ofxEasyFboGlitch::draw(ofFbo _fbo,float _drawX,float _drawY,float _drawW,fl
     _fbo.draw(0,0,fboW,fboH);
     fbo.end();
     if(glitchReset){
+#ifdef TARGET_OPENGLES
+        fbo.readToPixels(pix);
+#else
         reader.readToPixels(fbo, pix);
+#endif
         glitchImg.setFromPixels(pix);
         glitchReset=false;
     }
